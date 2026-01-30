@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS debts;
+DROP TYPE IF EXISTS debt_status;
