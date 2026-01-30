@@ -9,7 +9,7 @@ CREATE TABLE merchants (
     currency VARCHAR(10) NOT NULL,
     amount DECIMAL(10, 2) NOT NULL DEFAULT 0,
     status merchant_status NOT NULL DEFAULT 'pending',
-    user_id_owner INTEGER NOT NULL FOREIGN KEY REFERENCES users(id),
+    user_id_owner INT NOT NULL REFERENCES users(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
