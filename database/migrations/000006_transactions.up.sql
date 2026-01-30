@@ -7,7 +7,7 @@ CREATE TABLE transactions (
     amount DECIMAL(10, 2) NOT NULL DEFAULT 0,
     type transaction_type NOT NULL DEFAULT 'payment',
     reference_id INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --index
