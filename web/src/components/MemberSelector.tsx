@@ -36,7 +36,7 @@ export default function MemberSelector({
                 <button
                     type="button"
                     onClick={handleSelectAll}
-                    className="text-sm text-blue-600 hover:text-blue-800"
+                    className="text-sm text-primary hover:text-primary/80"
                 >
                     {selectedMembers.length === members.length ? 'Tout désélectionner' : 'Tout sélectionner'}
                 </button>

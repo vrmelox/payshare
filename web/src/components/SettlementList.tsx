@@ -14,11 +14,11 @@ export default function SettlementList({ settlements, members }: SettlementListP
         <div className="space-y-4">
             <h2 className="text-xl font-semibold">Règlements suggérés</h2>
             {settlements.length === 0 ? (
-                <p className="text-green-600 font-medium">✓ Tous les comptes sont réglés !</p>
+                <p className="text-accent font-medium">✓ Tous les comptes sont réglés !</p>
             ) : (
                 <ul className="space-y-3">
                     {settlements.map((settlement, index) => (
-                        <li key={index} className="p-4 border border-blue-200 bg-blue-50 rounded-lg">
+                        <li key={index} className="p-4 border border-primary/30 bg-primary/5 rounded-lg">
                             <div className="flex items-center justify-between">
                                 <div className="flex-1">
                                     <p className="text-sm">

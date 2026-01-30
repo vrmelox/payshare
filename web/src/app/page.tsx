@@ -6,12 +6,12 @@ export default function Home() {
   const groups: Group[] = []; // Placeholder for groups data
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-light to-white">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <header className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">PayShare</h1>
-          <p className="text-gray-600">
+          <h1 className="text-4xl font-bold text-dark mb-2">PayShare</h1>
+          <p className="text-dark/70">
             Suivre, répartir et régler des dépenses communes en toute simplicité
           </p>
         </header>
@@ -22,11 +22,11 @@ export default function Home() {
             href="/dashboard"
             className="px-4 py-2 bg-white rounded-lg shadow hover:shadow-md transition-shadow border border-gray-200"
           >
-            📊 Dashboard
+            Dashboard
           </Link>
           <Link
             href="/groups/new"
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-gray-800 text-white rounded-lg shadow hover:bg-primary/90 transition-colors"
           >
             ➕ Nouveau groupe
           </Link>
@@ -44,7 +44,7 @@ export default function Home() {
               </p>
               <Link
                 href="/groups/new"
-                className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
               >
                 Créer votre premier groupe
               </Link>
@@ -55,7 +55,7 @@ export default function Home() {
                 <Link
                   key={group.id}
                   href={`/groups/${group.id}`}
-                  className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all"
+                  className="block p-4 border border-light rounded-lg hover:border-primary hover:shadow-md transition-all"
                 >
                   <h3 className="font-semibold text-lg">{group.name}</h3>
                   {group.description && (

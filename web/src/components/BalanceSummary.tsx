@@ -18,10 +18,10 @@ export default function BalanceSummary({ balances }: BalanceSummaryProps) {
                                 <span className="font-medium">{balance.memberName}</span>
                                 <span
                                     className={`text-lg font-semibold ${balance.balance > 0
-                                            ? 'text-green-600'
-                                            : balance.balance < 0
-                                                ? 'text-red-600'
-                                                : 'text-gray-600'
+                                        ? 'text-accent'
+                                        : balance.balance < 0
+                                            ? 'text-red-600'
+                                            : 'text-gray-600'
                                         }`}
                                 >
                                     {balance.balance > 0 ? '+' : ''}
