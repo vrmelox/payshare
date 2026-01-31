@@ -32,83 +32,88 @@ const Login = () => {
                 </div>
             </section>
 
-            {/* Section formulaire */}
-            <section className="flex-1 max-w-md mx-auto flex items-center justify-center p-6 md:p-12 bg-white">
-                <div className="w-full space-y-8">
-                    {/* Logo et titre */}
-                    <div className="text-center">
-                        <div className="flex justify-center mb-4">
-                            <Image 
-                                src="/logo.svg" 
-                                alt="Logo PayShare" 
-                                width={60} 
-                                height={60}
-                                priority
-                            />
+            {/* Section formulaire - Centrée */}
+            <section className="flex-1 flex items-center justify-center p-6 md:p-12">
+                <div className="w-full max-w-md space-y-8">
+                    {/* Card du formulaire */}
+                    <div className="bg-white border border-gray-300 rounded-lg p-8 shadow-sm">
+                        {/* Logo et titre */}
+                        <div className="text-center mb-8">
+                            <div className="flex justify-center mb-4">
+                                <Image 
+                                    src="/logo.svg" 
+                                    alt="Logo PayShare" 
+                                    width={60} 
+                                    height={60}
+                                    priority
+                                />
+                            </div>
+                            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                                Welcome back
+                            </h2>
+                            <p className="text-gray-600">Connect to your account</p>
                         </div>
-                        <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                            Welcome back
-                        </h2>
-                        <p className="text-gray-600">Connect to your account</p>
+
+                        {/* Formulaire */}
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
+                                    Email
+                                </label>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    placeholder="your.email@example.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition outline-none text-gray-900"
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="password" className="block text-sm font-medium text-gray-900 mb-2">
+                                    Password
+                                </label>
+                                <input
+                                    id="password"
+                                    type="password"
+                                    placeholder="••••••••"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition outline-none text-gray-900"
+                                />
+                            </div>
+
+                            <div className="flex items-center justify-between text-sm">
+                                <label className="flex items-center cursor-pointer">
+                                    <input type="checkbox" className="mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                                    <span className="text-gray-600">Remember me</span>
+                                </label>
+                                <a href="#" className="text-blue-600 hover:text-blue-700 font-medium transition">
+                                    Forgot password?
+                                </a>
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {isLoading ? "Connecting..." : "Sign in"}
+                            </button>
+
+                            <p className="text-center text-sm text-gray-600">
+                                Don't have an account?{" "}
+                                <a href="#" className="text-blue-600 hover:text-blue-700 font-medium transition">
+                                    Create account
+                                </a>
+                            </p>
+                        </form>
                     </div>
 
-                    {/* Formulaire */}
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                                Email
-                            </label>
-                            <input
-                                id="email"
-                                type="email"
-                                placeholder="votre.email@exemple.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition outline-none"
-                            />
-                        </div>
 
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                                Mot de passe
-                            </label>
-                            <input
-                                id="password"
-                                type="password"
-                                placeholder="••••••••"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition outline-none"
-                            />
-                        </div>
-
-                        <div className="flex items-center justify-between text-sm">
-                            <label className="flex items-center">
-                                <input type="checkbox" className="mr-2 rounded" />
-                                <span className="text-gray-600">Se souvenir de moi</span>
-                            </label>
-                            <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
-                                Mot de passe oublié ?
-                            </a>
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={isLoading}
-                            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            {isLoading ? "Connexion..." : "Se connecter"}
-                        </button>
-
-                        <p className="text-center text-sm text-gray-600">
-                            Pas encore de compte ?{" "}
-                            <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
-                                Créer un compte
-                            </a>
-                        </p>
-                    </form>
                 </div>
             </section>
         </div>
