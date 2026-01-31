@@ -22,7 +22,7 @@ export default function Sidebar({activeItem = '' }) {
                 </div>
                 <div className="flex-1">
                   <div className="text-sm font-semibold text-slate-800">Merchant</div>
-                  <div className="text-xs text-blue-600 font-medium">Personal account · Free Trial</div>
+                  <div className="text-xs text-blue-600 font-medium">Buissiness account · Free Trial</div>
                 </div>
                 <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
