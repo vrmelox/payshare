@@ -20,11 +20,6 @@ export const Merchants = [
         logo: "/netflix.svg",
     },
     {
-        id: 5,
-        name: "Spotify",
-        logo: "/spotify.svg",
-    },
-    {
         id: 6,
         name: "Adidas",
         logo: "/adidas.svg",
@@ -83,11 +78,6 @@ export const Merchants = [
         id: 17,
         name: "Booking.com",
         logo: "/booking.svg",
-    },
-    {
-        id: 18,
-        name: "Lowe's",
-        logo: "/lowes.svg",
     },
     {
         id: 19,
