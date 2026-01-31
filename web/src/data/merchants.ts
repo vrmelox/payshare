@@ -20,11 +20,6 @@ export const Merchants = [
         logo: "/netflix.svg",
     },
     {
-        id: 5,
-        name: "Spotify",
-        logo: "/spotify.svg",
-    },
-    {
         id: 6,
         name: "Adidas",
         logo: "/adidas.svg",
