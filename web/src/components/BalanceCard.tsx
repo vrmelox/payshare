@@ -15,12 +15,7 @@ export default function BalanceCard() {
                     </div>
                     
                     <div className="w-20 h-20">
-                        <svg viewBox="0 0 100 100" className="w-full h-full">
-                            <circle cx="50" cy="50" r="45" fill="#FCD34D" opacity="0.3" />
-                            <circle cx="50" cy="50" r="38" fill="#FCD34D" opacity="0.5" />
-                            <circle cx="50" cy="50" r="30" fill="#FCD34D" />
-                            <text x="50" y="58" textAnchor="middle" className="text-2xl font-bold" fill="white">$</text>
-                        </svg>
+                        <img src="/transaction.svg" alt="Transaction" />
                     </div>
             </div>
         </div>
