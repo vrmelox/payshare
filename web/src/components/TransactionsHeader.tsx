@@ -89,8 +89,8 @@ const TransactionRow = ({
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
           {recipientAvatar ? (
-            <div className="w-8 h-8 bg-slate-100 flex items-center justify-center border border-slate-200 overflow-hidden shadow-sm">
-              <img src={recipientAvatar} alt={recipientName} className={`w-full h-full ${isMerchant ? 'p-1.5' : 'object-cover'}`} />
+            <div className="w-8 h-8 bg-slate-100 flex items-center justify-center  border-slate-200 overflow-hidden shadow-sm">
+              <img src={recipientAvatar} alt={recipientName} className={`w-full h-full ${isMerchant ? '' : 'object-cover'}`} />
             </div>
           ) : (
             <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${recipientColor} flex items-center justify-center text-white text-xs font-bold shadow-md`}>
