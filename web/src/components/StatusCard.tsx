@@ -1,8 +1,13 @@
 export default function StatusBadge({ status }: { status: string }) {
   const colors: { [key: string]: string } = {
-    Paid: 'bg-green-100 text-green-700',
-    Pending: 'bg-amber-100 text-amber-700',
-    Failed: 'bg-red-100 text-red-700',
+    Paid: 'bg-green-50 text-green-700 border-green-200',
+    Pending: 'bg-yellow-50 text-yellow-700 border-yellow-200',
+    Failed: 'bg-red-50 text-red-700 border-red-200',
   };
-  return <span className={`px-2 py-1 rounded-full text-xs font-medium ${colors[status] || 'bg-slate-100 text-slate-700'}`}>{status}</span>;
+
+  return (
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium border ${colors[status] || 'bg-gray-50 text-gray-700 border-gray-200'}`}>
+      {status}
+    </span>
+  );
 }
