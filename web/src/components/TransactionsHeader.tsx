@@ -1,6 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { Merchants } from '../data/merchants';
 import { Users } from '../data/users';
+import { SystemPayments } from '../data/systempayments';
+
+// --- Types ---
+
+type TransactionType = 'payment' | 'deposit' | 'refund' | 'reimbursement';
 
 // --- Sub-components ---
 
@@ -17,37 +22,34 @@ const StatusBadge = ({ status }: { status: 'Success' | 'Pending' | 'Failed' }) =
   );
 };
 
-const CategoryBadge = ({ category }: { category: string }) => {
-  const categoryStyles: Record<string, string> = {
-    Transfer: 'bg-blue-50 text-blue-700',
-    Rent: 'bg-orange-50 text-orange-700',
-    Receive: 'bg-purple-50 text-purple-700',
-    Shopping: 'bg-cyan-50 text-cyan-700',
-    Subscription: 'bg-slate-50 text-slate-700'
+const CategoryBadge = ({ type }: { type: TransactionType }) => {
+  const typeStyles: Record<TransactionType, string> = {
+    payment: 'bg-blue-50 text-blue-700',
+    deposit: 'bg-emerald-50 text-emerald-700',
+    refund: 'bg-orange-50 text-orange-700',
+    reimbursement: 'bg-purple-50 text-purple-700'
   };
 
-  const icons: Record<string, string> = {
-    Transfer: '↑',
-    Receive: '↓',
-    Rent: '🏠',
-    Shopping: '🛍️',
-    Subscription: '📱'
+  const labels: Record<TransactionType, string> = {
+    payment: 'Payment',
+    deposit: 'Deposit',
+    refund: 'Refund',
+    reimbursement: 'Reimbursement'
   };
 
   return (
-    <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${categoryStyles[category] || 'bg-slate-50 text-slate-700'}`}>
-      {icons[category] || '•'}
-      {category}
+    <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${typeStyles[type]}`}>
+      {labels[type]}
     </span>
   );
 };
 
 interface TransactionRowProps {
-  cardType: 'visa' | 'mastercard' | 'black';
+  systemPayment: typeof SystemPayments[0];
   cardNumber: string;
   date: string;
   status: 'Success' | 'Pending' | 'Failed';
-  category: string;
+  type: TransactionType;
   amount: string;
   recipientName: string;
   recipientAvatar?: string;
@@ -56,31 +58,24 @@ interface TransactionRowProps {
 }
 
 const TransactionRow = ({
-  cardType,
+  systemPayment,
   cardNumber,
   date,
   status,
-  category,
+  type,
   amount,
   recipientName,
   recipientAvatar,
   recipientColor = "from-slate-500 to-slate-600",
   isMerchant = false
 }: TransactionRowProps) => {
-  const cardColors = {
-    visa: 'bg-blue-600',
-    mastercard: 'bg-emerald-600',
-    black: 'bg-slate-800'
-  };
 
   return (
     <tr className="hover:bg-slate-50/50 transition-colors">
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
-          <div className={`w-10 h-7 ${cardColors[cardType]} rounded flex items-center justify-center text-white text-xs font-bold shadow-md`}>
-            {cardType === 'visa' && 'VISA'}
-            {cardType === 'mastercard' && 'MC'}
-            {cardType === 'black' && '■'}
+          <div className={`w-10 h-7 bg-white border border-slate-200 rounded flex items-center justify-center p-1 shadow-sm`}>
+            <img src={systemPayment.logo} alt={systemPayment.name} className="w-full h-full object-contain" />
           </div>
           <div className="text-sm text-slate-600 font-mono">•••• •••• •••• {cardNumber}</div>
         </div>
@@ -106,7 +101,7 @@ const TransactionRow = ({
         </div>
       </td>
       <td className="px-6 py-4">
-        <CategoryBadge category={category} />
+        <CategoryBadge type={type} />
       </td>
       <td className="px-6 py-4 text-right">
         <div className="text-sm font-semibold text-slate-800">{amount}</div>
@@ -193,24 +188,29 @@ export default function TransactionsHeader() {
 
   // Memoize random recipients to avoid changes on every re-render unless needed
   const randomTransactions = useMemo(() => {
+    const types: TransactionType[] = ['payment', 'deposit', 'refund', 'reimbursement'];
+
     return [
-      { id: 1, cardType: 'visa', cardNumber: '0799', date: 'Feb 17, 2025', status: 'Pending', category: 'Transfer', amount: 'USD 1,500' },
-      { id: 2, cardType: 'mastercard', cardNumber: '7586', date: 'Feb 17, 2025', status: 'Success', category: 'Transfer', amount: 'USD 1,500' },
-      { id: 3, cardType: 'visa', cardNumber: '0799', date: 'Feb 16, 2025', status: 'Success', category: 'Transfer', amount: 'USD 1,500' },
-      { id: 4, cardType: 'visa', cardNumber: '0799', date: 'Feb 16, 2025', status: 'Success', category: 'Rent', amount: 'USD 1,000' },
-      { id: 5, cardType: 'mastercard', cardNumber: '7586', date: 'Feb 14, 2025', status: 'Success', category: 'Transfer', amount: 'USD 1,500' },
-      { id: 6, cardType: 'visa', cardNumber: '0799', date: 'Feb 13, 2025', status: 'Failed', category: 'Transfer', amount: 'USD 1,500' },
-      { id: 7, cardType: 'black', cardNumber: '5560', date: 'Feb 10, 2025', status: 'Success', category: 'Receive', amount: 'USD 1,500' },
-      { id: 8, cardType: 'visa', cardNumber: '3557', date: 'Feb 9, 2025', status: 'Success', category: 'Shopping', amount: 'USD 1,500' },
-      { id: 9, cardType: 'visa', cardNumber: '3557', date: 'Feb 5, 2025', status: 'Success', category: 'Subscription', amount: 'USD 1,500' },
+      { id: 1, cardNumber: '0799', date: 'Feb 17, 2025', status: 'Pending', amount: 'USD 1,500' },
+      { id: 2, cardNumber: '7586', date: 'Feb 17, 2025', status: 'Success', amount: 'USD 1,500' },
+      { id: 3, cardNumber: '0799', date: 'Feb 16, 2025', status: 'Success', amount: 'USD 1,500' },
+      { id: 4, cardNumber: '0799', date: 'Feb 16, 2025', status: 'Success', amount: 'USD 1,000' },
+      { id: 5, cardNumber: '7586', date: 'Feb 14, 2025', status: 'Success', amount: 'USD 1,500' },
+      { id: 6, cardNumber: '0799', date: 'Feb 13, 2025', status: 'Failed', amount: 'USD 1,500' },
+      { id: 7, cardNumber: '5560', date: 'Feb 10, 2025', status: 'Success', amount: 'USD 1,500' },
+      { id: 8, cardNumber: '3557', date: 'Feb 9, 2025', status: 'Success', amount: 'USD 1,500' },
+      { id: 9, cardNumber: '3557', date: 'Feb 5, 2025', status: 'Success', amount: 'USD 1,500' },
     ].map(t => {
       const isMerchant = Math.random() > 0.6; // 40% chance of being a merchant
+      const systemPayment = getRandomItem(SystemPayments);
+      const type = getRandomItem(types);
+
       if (isMerchant) {
         const merchant = getRandomItem(Merchants);
-        return { ...t, recipientName: merchant.name, recipientAvatar: merchant.logo, isMerchant: true };
+        return { ...t, type, systemPayment, recipientName: merchant.name, recipientAvatar: merchant.logo, isMerchant: true };
       } else {
         const user = getRandomItem(Users);
-        return { ...t, recipientName: `${user.first_name} ${user.last_name}`, recipientColor: getRandomItem(avatarColors), isMerchant: false };
+        return { ...t, type, systemPayment, recipientName: `${user.first_name} ${user.last_name}`, recipientColor: getRandomItem(avatarColors), isMerchant: false };
       }
     });
   }, []);
@@ -263,11 +263,11 @@ export default function TransactionsHeader() {
             {selectedMonth === 'February 2025' && randomTransactions.map((t: any) => (
               <TransactionRow
                 key={t.id}
-                cardType={t.cardType}
+                systemPayment={t.systemPayment}
                 cardNumber={t.cardNumber}
                 date={t.date}
                 status={t.status}
-                category={t.category}
+                type={t.type}
                 amount={t.amount}
                 recipientName={t.recipientName}
                 recipientAvatar={t.recipientAvatar}
