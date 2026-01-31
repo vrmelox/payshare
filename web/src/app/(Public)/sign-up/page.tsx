@@ -20,7 +20,7 @@ const SignUp = () => {
         city: "",
         state: "",
         zip_code: "",
-        country: "Ethiopia", // Default as per image
+        country: "Ethiopia",
     })
     const [paymentMethod, setPaymentMethod] = useState("card")
 
@@ -38,7 +38,6 @@ const SignUp = () => {
             nextStep()
         } else {
             console.log("Submitting form:", formData, "Payment Method:", paymentMethod)
-            // Final submission logic
         }
     }
 
@@ -50,24 +49,24 @@ const SignUp = () => {
                 style={{ backgroundImage: "url('/sharinglove.jpg')" }}
                 aria-hidden="true"
             >
-                <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-end p-12">
+                <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-end p-8">
                     <div className="text-white">
-                        <h2 className="text-4xl font-black mb-4 font-epilogue leading-tight">Join the<br />PayShare Community</h2>
-                        <p className="text-lg opacity-90 font-inter">Start sharing and growing together with 50,000+ users worldwide.</p>
+                        <h2 className="text-3xl font-black mb-3 font-epilogue leading-tight">Join the<br />PayShare Community</h2>
+                        <p className="text-base opacity-90 font-inter">Start sharing and growing together with 50,000+ users worldwide.</p>
                     </div>
                 </div>
             </section>
 
             {/* Section Droite - Formulaire */}
-            <section className="flex-1 flex flex-col bg-[#F5F9FA] relative">
+            <section className="flex-1 flex flex-col bg-[#F5F9FA] relative overflow-hidden">
                 {/* Navigation Back */}
-                <div className="p-6">
+                <div className="px-6 py-4 flex-shrink-0">
                     {step > 1 && (
                         <button
                             onClick={prevStep}
-                            className="flex items-center gap-2 text-dark font-bold text-sm hover:opacity-70 transition-opacity cursor-pointer"
+                            className="flex items-center gap-2 text-dark font-bold text-sm hover:opacity-70 transition-opacity"
                         >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
                             </svg>
                             Back
@@ -75,163 +74,164 @@ const SignUp = () => {
                     )}
                 </div>
 
-                <div className="flex-1 flex items-center justify-center p-6 md:p-12 overflow-y-auto">
-                    <div className="w-full max-w-xl">
-                        <div className="mb-8">
+                {/* Contenu principal - scrollable si nécessaire */}
+                <div className="flex-1 flex items-center justify-center px-6 md:px-8 overflow-y-auto">
+                    <div className="w-full max-w-xl py-4">
+                        <div className="mb-6">
                             <div className="flex items-center gap-2 mb-2">
-                                <div className={`h-1.5 w-12 rounded-full ${step >= 1 ? 'bg-accent' : 'bg-gray-200'}`}></div>
-                                <div className={`h-1.5 w-12 rounded-full ${step >= 2 ? 'bg-accent' : 'bg-gray-200'}`}></div>
-                                <div className={`h-1.5 w-12 rounded-full ${step >= 3 ? 'bg-accent' : 'bg-gray-200'}`}></div>
+                                <div className={`h-1 w-10 rounded-full ${step >= 1 ? 'bg-accent' : 'bg-gray-200'}`}></div>
+                                <div className={`h-1 w-10 rounded-full ${step >= 2 ? 'bg-accent' : 'bg-gray-200'}`}></div>
+                                <div className={`h-1 w-10 rounded-full ${step >= 3 ? 'bg-accent' : 'bg-gray-200'}`}></div>
                             </div>
-                            <h1 className="text-3xl font-black text-dark font-epilogue">
+                            <h1 className="text-2xl md:text-3xl font-black text-dark font-epilogue">
                                 {step === 1 && "Create your account"}
                                 {step === 2 && "Personal Details"}
                                 {step === 3 && "Location & Payment"}
                             </h1>
-                            <p className="text-gray-500 text-sm">Step {step} of 3</p>
+                            <p className="text-gray-500 text-xs">Step {step} of 3</p>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             {step === 1 && (
-                                <div className="space-y-4">
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="first_name" className="text-xs font-bold text-dark uppercase tracking-wider">First Name</label>
-                                            <input type="text" id="first_name" value={formData.first_name} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="John" />
+                                <div className="space-y-3">
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div className="space-y-1">
+                                            <label htmlFor="first_name" className="text-[10px] font-bold text-dark uppercase tracking-wider">First Name</label>
+                                            <input type="text" id="first_name" value={formData.first_name} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="John" />
                                         </div>
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="last_name" className="text-xs font-bold text-dark uppercase tracking-wider">Last Name</label>
-                                            <input type="text" id="last_name" value={formData.last_name} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="Doe" />
+                                        <div className="space-y-1">
+                                            <label htmlFor="last_name" className="text-[10px] font-bold text-dark uppercase tracking-wider">Last Name</label>
+                                            <input type="text" id="last_name" value={formData.last_name} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="Doe" />
                                         </div>
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label htmlFor="username" className="text-xs font-bold text-dark uppercase tracking-wider">Username</label>
-                                        <input type="text" id="username" value={formData.username} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="johndoe_123" />
+                                    <div className="space-y-1">
+                                        <label htmlFor="username" className="text-[10px] font-bold text-dark uppercase tracking-wider">Username</label>
+                                        <input type="text" id="username" value={formData.username} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="johndoe_123" />
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label htmlFor="email" className="text-xs font-bold text-dark uppercase tracking-wider">Email Address</label>
-                                        <input type="email" id="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="john@example.com" />
+                                    <div className="space-y-1">
+                                        <label htmlFor="email" className="text-[10px] font-bold text-dark uppercase tracking-wider">Email Address</label>
+                                        <input type="email" id="email" value={formData.email} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="john@example.com" />
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label htmlFor="phone" className="text-xs font-bold text-dark uppercase tracking-wider">Phone Number</label>
-                                        <input type="tel" id="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="+229 00 00 00 00" />
+                                    <div className="space-y-1">
+                                        <label htmlFor="phone" className="text-[10px] font-bold text-dark uppercase tracking-wider">Phone Number</label>
+                                        <input type="tel" id="phone" value={formData.phone} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="+229 00 00 00 00" />
                                     </div>
 
-                                    <div className="relative py-4">
+                                    <div className="relative py-3">
                                         <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200"></div></div>
-                                        <div className="relative flex justify-center text-xs uppercase tracking-widest"><span className="px-3 bg-[#F5F9FA] text-gray-400 font-bold">Or register with</span></div>
+                                        <div className="relative flex justify-center text-[10px] uppercase tracking-widest"><span className="px-2 bg-[#F5F9FA] text-gray-400 font-bold">Or register with</span></div>
                                     </div>
 
-                                    <div className="flex gap-4">
-                                        <button type="button" className="flex-1 flex items-center justify-center gap-3 py-3 border border-gray-200 rounded-xl bg-white hover:bg-gray-50 transition font-bold text-sm text-dark">
-                                            <Image src="/paystack.svg" alt="Paystack" width={20} height={20} /> Paystack
+                                    <div className="flex gap-3">
+                                        <button type="button" className="flex-1 flex items-center justify-center gap-2 py-2 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition font-bold text-xs text-dark">
+                                            <Image src="/paystack.svg" alt="Paystack" width={16} height={16} /> Paystack
                                         </button>
-                                        <button type="button" className="flex-1 flex items-center justify-center gap-3 py-3 border border-gray-200 rounded-xl bg-white hover:bg-gray-50 transition font-bold text-sm text-dark">
-                                            <Image src="/gpay.svg" alt="GPay" width={20} height={20} /> GPay
+                                        <button type="button" className="flex-1 flex items-center justify-center gap-2 py-2 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition font-bold text-xs text-dark">
+                                            <Image src="/gpay.svg" alt="GPay" width={16} height={16} /> GPay
                                         </button>
                                     </div>
                                 </div>
                             )}
 
                             {step === 2 && (
-                                <div className="space-y-4">
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="gender" className="text-xs font-bold text-dark uppercase tracking-wider">Gender</label>
-                                            <select id="gender" value={formData.gender} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark appearance-none">
+                                <div className="space-y-3">
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div className="space-y-1">
+                                            <label htmlFor="gender" className="text-[10px] font-bold text-dark uppercase tracking-wider">Gender</label>
+                                            <select id="gender" value={formData.gender} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm">
                                                 <option value="">Select...</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                                 <option value="Other">Other</option>
                                             </select>
                                         </div>
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="birth_date" className="text-xs font-bold text-dark uppercase tracking-wider">Birth Date</label>
-                                            <input type="date" id="birth_date" value={formData.birth_date} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" />
+                                        <div className="space-y-1">
+                                            <label htmlFor="birth_date" className="text-[10px] font-bold text-dark uppercase tracking-wider">Birth Date</label>
+                                            <input type="date" id="birth_date" value={formData.birth_date} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" />
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="city_of_birth" className="text-xs font-bold text-dark uppercase tracking-wider">City of Birth</label>
-                                            <input type="text" id="city_of_birth" value={formData.city_of_birth} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="Paris" />
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div className="space-y-1">
+                                            <label htmlFor="city_of_birth" className="text-[10px] font-bold text-dark uppercase tracking-wider">City of Birth</label>
+                                            <input type="text" id="city_of_birth" value={formData.city_of_birth} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="Paris" />
                                         </div>
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="country_of_birth" className="text-xs font-bold text-dark uppercase tracking-wider">Country of Birth</label>
-                                            <input type="text" id="country_of_birth" value={formData.country_of_birth} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="France" />
+                                        <div className="space-y-1">
+                                            <label htmlFor="country_of_birth" className="text-[10px] font-bold text-dark uppercase tracking-wider">Country of Birth</label>
+                                            <input type="text" id="country_of_birth" value={formData.country_of_birth} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="France" />
                                         </div>
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label htmlFor="password" className="text-xs font-bold text-dark uppercase tracking-wider">Create Password</label>
-                                        <input type="password" id="password" value={formData.password} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="••••••••" />
-                                        <p className="text-[10px] text-gray-400">Must be at least 8 characters with a number and a symbol.</p>
+                                    <div className="space-y-1">
+                                        <label htmlFor="password" className="text-[10px] font-bold text-dark uppercase tracking-wider">Create Password</label>
+                                        <input type="password" id="password" value={formData.password} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="••••••••" />
+                                        <p className="text-[9px] text-gray-400">Must be at least 8 characters with a number and a symbol.</p>
                                     </div>
                                 </div>
                             )}
 
                             {step === 3 && (
-                                <div className="space-y-4">
-                                    <div className="space-y-1.5">
-                                        <label htmlFor="address" className="text-xs font-bold text-dark uppercase tracking-wider">Street Address</label>
-                                        <input type="text" id="address" value={formData.address} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="123 Main St" />
+                                <div className="space-y-3">
+                                    <div className="space-y-1">
+                                        <label htmlFor="address" className="text-[10px] font-bold text-dark uppercase tracking-wider">Street Address</label>
+                                        <input type="text" id="address" value={formData.address} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="123 Main St" />
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="city" className="text-xs font-bold text-dark uppercase tracking-wider">City</label>
-                                            <input type="text" id="city" value={formData.city} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="New York" />
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div className="space-y-1">
+                                            <label htmlFor="city" className="text-[10px] font-bold text-dark uppercase tracking-wider">City</label>
+                                            <input type="text" id="city" value={formData.city} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="New York" />
                                         </div>
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="state" className="text-xs font-bold text-dark uppercase tracking-wider">State/Region</label>
-                                            <input type="text" id="state" value={formData.state} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="NY" />
+                                        <div className="space-y-1">
+                                            <label htmlFor="state" className="text-[10px] font-bold text-dark uppercase tracking-wider">State/Region</label>
+                                            <input type="text" id="state" value={formData.state} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="NY" />
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="zip_code" className="text-xs font-bold text-dark uppercase tracking-wider">Zip Code</label>
-                                            <input type="text" id="zip_code" value={formData.zip_code} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="10001" />
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div className="space-y-1">
+                                            <label htmlFor="zip_code" className="text-[10px] font-bold text-dark uppercase tracking-wider">Zip Code</label>
+                                            <input type="text" id="zip_code" value={formData.zip_code} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="10001" />
                                         </div>
-                                        <div className="space-y-1.5">
-                                            <label htmlFor="country" className="text-xs font-bold text-dark uppercase tracking-wider">Country</label>
-                                            <input type="text" id="country" value={formData.country} onChange={handleChange} required className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark" placeholder="Ethiopia" />
+                                        <div className="space-y-1">
+                                            <label htmlFor="country" className="text-[10px] font-bold text-dark uppercase tracking-wider">Country</label>
+                                            <input type="text" id="country" value={formData.country} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="Ethiopia" />
                                         </div>
                                     </div>
 
                                     <div className="pt-2">
-                                        <label className="text-xs font-bold text-dark uppercase tracking-wider block mb-3">Payment Method</label>
-                                        <div className="grid grid-cols-2 gap-4">
+                                        <label className="text-[10px] font-bold text-dark uppercase tracking-wider block mb-2">Payment Method</label>
+                                        <div className="grid grid-cols-2 gap-3">
                                             <button
                                                 type="button"
                                                 onClick={() => setPaymentMethod('card')}
-                                                className={`flex flex-col items-center justify-center p-4 border rounded-xl transition-all ${paymentMethod === 'card' ? 'border-accent bg-accent/5 shadow-inner ring-1 ring-accent' : 'border-gray-200 bg-white hover:bg-gray-50'}`}
+                                                className={`flex flex-col items-center justify-center p-3 border rounded-lg transition-all ${paymentMethod === 'card' ? 'border-accent bg-accent/5 ring-1 ring-accent' : 'border-gray-200 bg-white hover:bg-gray-50'}`}
                                             >
-                                                <div className="w-8 h-8 mb-2 flex items-center justify-center text-accent text-2xl">💳</div>
-                                                <span className={`text-sm font-bold ${paymentMethod === 'card' ? 'text-accent' : 'text-gray-400'}`}>Credit Card</span>
+                                                <div className="w-6 h-6 mb-1 flex items-center justify-center text-xl">💳</div>
+                                                <span className={`text-xs font-bold ${paymentMethod === 'card' ? 'text-accent' : 'text-gray-400'}`}>Credit Card</span>
                                             </button>
                                             <button
                                                 type="button"
                                                 onClick={() => setPaymentMethod('cashapp')}
-                                                className={`flex flex-col items-center justify-center p-4 border rounded-xl transition-all ${paymentMethod === 'cashapp' ? 'border-accent bg-accent/5 shadow-inner ring-1 ring-accent' : 'border-gray-200 bg-white hover:bg-gray-50'}`}
+                                                className={`flex flex-col items-center justify-center p-3 border rounded-lg transition-all ${paymentMethod === 'cashapp' ? 'border-accent bg-accent/5 ring-1 ring-accent' : 'border-gray-200 bg-white hover:bg-gray-50'}`}
                                             >
-                                                <div className="w-8 h-8 mb-2 flex items-center justify-center text-accent text-2xl">💵</div>
-                                                <span className={`text-sm font-bold ${paymentMethod === 'cashapp' ? 'text-accent' : 'text-gray-400'}`}>Cash App</span>
+                                                <div className="w-6 h-6 mb-1 flex items-center justify-center text-xl">💵</div>
+                                                <span className={`text-xs font-bold ${paymentMethod === 'cashapp' ? 'text-accent' : 'text-gray-400'}`}>Cash App</span>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             )}
 
-                            <div className="pt-4 flex items-center gap-4">
+                            <div className="pt-3 flex items-center gap-3">
                                 {step === 3 && (
                                     <button
                                         type="button"
                                         onClick={() => console.log("Added later")}
-                                        className="text-gray-400 text-sm font-bold hover:text-dark transition-colors px-4"
+                                        className="text-gray-400 text-xs font-bold hover:text-dark transition-colors px-3"
                                     >
                                         Add later
                                     </button>
                                 )}
                                 <button
                                     type="submit"
-                                    className="flex-1 bg-black text-white font-black py-4 rounded-full hover:bg-gray-900 shadow-xl hover:shadow-2xl transition-all active:scale-[0.98] font-epilogue"
+                                    className="flex-1 bg-black text-white font-black py-3 rounded-full hover:bg-gray-900 shadow-lg hover:shadow-xl transition-all active:scale-[0.98] font-epilogue text-sm"
                                 >
                                     {step < 3 ? "Continue" : "Complete Registration"}
                                 </button>
@@ -240,8 +240,8 @@ const SignUp = () => {
                     </div>
                 </div>
 
-                {/* Footer simple */}
-                <div className="p-6 text-center text-xs text-gray-400">
+                {/* Footer */}
+                <div className="px-6 py-4 text-center text-[10px] text-gray-400 flex-shrink-0">
                     Already have an account? <a href="/login" className="text-accent font-bold">Log in</a>
                 </div>
             </section>
