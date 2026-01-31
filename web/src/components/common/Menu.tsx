@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 export default function Menu() {
     const pathname = usePathname();
     return (
-        <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md">
+        <nav className="sticky top-0 z-50 w-full bg-[#F5F9FA] backdrop-blur-md">
             <div className="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                     <img src="/logo.svg" alt="PayShare" width={40} height={40} />

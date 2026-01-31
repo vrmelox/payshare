@@ -26,21 +26,25 @@
   --color-border: var(--border);
   
   /* Fonts */
-  --font-sans: var(--font-epilogue);
-  --font-mono: var(--font-inter);
+  --font-epilogue: var(--font-epilogue);
+  --font-inter: var(--font-inter);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #F5F9FA;
-    --foreground: #131B29;
+    --foreground: #F5F9FA;
     --border: #444CDB;
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-epilogue), system-ui, -apple-system, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-epilogue), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
