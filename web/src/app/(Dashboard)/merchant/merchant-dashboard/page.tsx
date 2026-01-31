@@ -1,8 +1,10 @@
+import Sidebar from '@/components/common/SideBar';
+
 export default function MerchantDashboardPage() {
-    return (
-        <div className="p-8">
-            <h1 className="text-2xl font-bold mb-4">Merchant Dashboard</h1>
-            <p className="text-gray-600 italic">Skeleton Page - Coming soon...</p>
-        </div>
-    );
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/20 to-indigo-50/30">
+      {/* Sidebar */}
+      <Sidebar activeItem="dashboard" />
+    </div>
+  );
 }
