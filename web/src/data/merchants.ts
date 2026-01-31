@@ -85,11 +85,6 @@ export const Merchants = [
         logo: "/booking.svg",
     },
     {
-        id: 18,
-        name: "Lowe's",
-        logo: "/lowes.svg",
-    },
-    {
         id: 19,
         name: "Uber",
         logo: "/uber.svg",

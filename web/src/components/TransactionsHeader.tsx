@@ -77,7 +77,7 @@ const TransactionRow = ({
           <div className={`w-10 h-7 bg-white border border-slate-200 rounded flex items-center justify-center p-1 shadow-sm`}>
             <img src={systemPayment.logo} alt={systemPayment.name} className="w-full h-full object-contain" />
           </div>
-          <div className="text-sm text-slate-600 font-mono">•••• •••• •••• {cardNumber}</div>
+          <div className="text-sm text-slate-600 font-mono">••• {cardNumber}</div>
         </div>
       </td>
       <td className="px-6 py-4">
@@ -88,9 +88,9 @@ const TransactionRow = ({
       </td>
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
-          {isMerchant && recipientAvatar ? (
-            <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 overflow-hidden">
-              <img src={recipientAvatar} alt={recipientName} className="w-5 h-5 object-contain" />
+          {recipientAvatar ? (
+            <div className="w-8 h-8 bg-slate-100 flex items-center justify-center border border-slate-200 overflow-hidden shadow-sm">
+              <img src={recipientAvatar} alt={recipientName} className={`w-full h-full ${isMerchant ? 'p-1.5' : 'object-cover'}`} />
             </div>
           ) : (
             <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${recipientColor} flex items-center justify-center text-white text-xs font-bold shadow-md`}>
@@ -210,7 +210,7 @@ export default function TransactionsHeader() {
         return { ...t, type, systemPayment, recipientName: merchant.name, recipientAvatar: merchant.logo, isMerchant: true };
       } else {
         const user = getRandomItem(Users);
-        return { ...t, type, systemPayment, recipientName: `${user.first_name} ${user.last_name}`, recipientColor: getRandomItem(avatarColors), isMerchant: false };
+        return { ...t, type, systemPayment, recipientName: `${user.first_name} ${user.last_name}`, recipientAvatar: user.avatar, recipientColor: getRandomItem(avatarColors), isMerchant: false };
       }
     });
   }, []);
