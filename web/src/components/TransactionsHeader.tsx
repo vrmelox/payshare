@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {Merchants } from '../data/merchants';
+import { SystemPayments } from '../data/systempayments';
 
 export default function TransactionsHeader() {
   const [selectedMonth, setSelectedMonth] = useState('February 2025');
