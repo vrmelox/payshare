@@ -8,15 +8,26 @@ export default function PayoutsSummary() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {summary.map((item, idx) => (
-        <div key={idx} className="bg-white rounded-xl shadow-sm border p-4 flex flex-col">
-          <span className="text-sm text-slate-500">{item.title}</span>
-          <div className="mt-2 text-2xl font-bold text-slate-800 flex items-center gap-2">
-            ${item.amount.toLocaleString()}
-            {item.status && <StatusBadge status={item.status} />}
+        <div key={idx} className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-gray-600">{item.title}</span>
+              <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                View transactions
+              </button>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <span className="text-3xl font-semibold text-gray-900">
+                ${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </span>
+              {item.status && <StatusBadge status={item.status} />}
+            </div>
+            
+            <span className="text-sm text-gray-500">{item.date}</span>
           </div>
-          <span className="text-xs text-slate-400 mt-1">{item.date}</span>
         </div>
       ))}
     </div>
