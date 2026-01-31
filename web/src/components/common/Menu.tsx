@@ -36,10 +36,10 @@ export default function Menu() {
 
                 <div className="flex items-center gap-4">
                     <button className="cursor-pointer px-5 py-2.5 text-sm font-semibold text-dark hover:text-primary transition-colors">
-                        Login
+                        <Link href="/login">Login</Link>
                     </button>
                     <button className="cursor-pointer px-6 py-2.5 text-sm font-semibold text-white bg-primary rounded-full hover:bg-primary/90 transition-all shadow-md hover:shadow-lg active:scale-95">
-                        Sign Up
+                        <Link href="/sign-up">Sign Up</Link>
                     </button>
                 </div>
             </div>
