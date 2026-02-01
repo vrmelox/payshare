@@ -1,10 +1,14 @@
 package handlers
 
 import (
-	"net/http"
-	"errors"
-	"os"
+	"bytes"
 	"encoding/json"
+	"errors"
+	"io"
+	"log"
+	"net/http"
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/vrmelo/payshare/config"
@@ -21,21 +25,41 @@ type PaystackUser struct {
 }
 
 func RegisterUserPaystack(user models.User) bool {
-	client := &http.Client{}
-	url := os.Getenv("PAYSTACK_API_URL")
-	secretKey := os.Getenv("PAYSTACK_SECRET_KEY")
-	authorization := "Authorization: Bearer " + secretKey
-	content_type := "Content-Type: application/json"
-	data := PaystackUser{
-		Email: user.Email,
+	payload := PaystackUser{
+		Email:     user.Email,
 		FirstName: user.FirstName,
-		LastName: user.LastName,
-		Phone: user.Phone,
+		LastName:  user.LastName,
+		Phone:     user.Phone,
 	}
-	json.NewEncoder(data)
-	response := client.Post(url, content_type, data)
-	fmt.Println(response)
-	if response.StatusCode == http.StatusOK {
+	var body bytes.Buffer
+	if err := json.NewEncoder(&body).Encode(payload); err != nil {
+		log.Println("JSON encode error:", err)
+		return false
+	}
+	req, err := http.NewRequest(
+	http.MethodPost,
+	os.Getenv("PAYSTACK_API_URL"),
+	&body,
+	)
+	if err != nil {
+		log.Println("Request creation error:", err)
+		return false
+	}
+	req.Header.Set("Authorization", "Bearer "+os.Getenv("PAYSTACK_SECRET_KEY"))
+	req.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Println("HTTP request error:", err)
+		return false
+	}
+	defer resp.Body.Close()
+
+	bodyBytes, _ := io.ReadAll(resp.Body)
+	log.Println("Paystack response:", string(bodyBytes))
+
+	if resp.StatusCode == http.StatusOK || resp.StatusCode == http.StatusCreated {
 		return true
 	}
 	return false
