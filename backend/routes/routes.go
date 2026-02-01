@@ -7,5 +7,5 @@ import (
 )
 
 func SetupRoutes(router *gin.Engine) {
-	router.POST("/users", handlers.RegisterUser)
+	router.POST("/auth/register", handlers.RegisterUser)
 }
