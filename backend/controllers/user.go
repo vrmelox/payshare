@@ -28,10 +28,6 @@ func CheckEmail(c *gin.Context, email string) (bool, error) {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 				return false, nil
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "An error occured on the serverside",
-			"details": result.Error.Error(),
-		})
 		return false, result.Error
 	}
 	return true, nil
@@ -45,10 +41,6 @@ func CheckUsername(c *gin.Context, username string) (bool, error) {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 				return false, nil
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "An error occured on the serverside",
-			"details": result.Error.Error(),
-		})
 		return false, result.Error
 	}
 	return true, nil
@@ -70,6 +62,34 @@ func RegisterUser(c *gin.Context) gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": "Validation failed",
 				"details": err.Error(),
+			})
+			return
+		}
+		verdict, err := CheckEmail(c, user.Email)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Failed to check existing user with this email",
+				"details": err.Error(),
+			})
+			return
+		}
+		if verdict == true {
+			c.JSON(http.StatusConflict, gin.H{
+				"error": "User already exist with this email",
+			})
+			return
+		}
+		verdict, err = CheckUsername(c, user.Username)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Failed to check existing user with this username",
+				"details": err.Error(),
+			})
+			return
+		}
+		if verdict == true {
+			c.JSON(http.StatusConflict, gin.H{
+				"error": "User already exist with this username",
 			})
 			return
 		}
