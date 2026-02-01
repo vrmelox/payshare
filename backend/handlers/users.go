@@ -46,9 +46,8 @@ func CheckUsername(c *gin.Context, username string) (bool, error) {
 	return true, nil
 }
 
-func RegisterUser(c *gin.Context) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		var user models.User
+func RegisterUser(c *gin.Context) {
+	var user models.User
 
 		if err := c.ShouldBind(&user); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H {
@@ -114,5 +113,4 @@ func RegisterUser(c *gin.Context) gin.HandlerFunc {
 				"message": "User created successfully",
 				"user": user,
 			})
-		}
 }
