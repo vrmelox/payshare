@@ -2,11 +2,14 @@ package controllers
 
 import (
 	"net/http"
+	"errors"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/vrmelo/payshare/config"
 	"github.com/vrmelo/payshare/models"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 func HashPassword(password string) (string, error) {
@@ -17,8 +20,26 @@ func HashPassword(password string) (string, error) {
 	return string(HashPassword), nil
 }
 
+func CheckEmail(c *gin.Context, email string) (bool, error) {
+	var user models.User
+	result := config.DB.Where("email = ?", email).First(&user)
 
-func RegisterUser() gin.HandlerFunc {
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+				return false, nil
+		}
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "An error occured on the serverside",
+			"details": result.Error.Error(),
+		})
+		return false, result.Error
+	}
+	return true, nil
+}
+
+
+
+func RegisterUser(c *gin.Context) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var user models.User
 
@@ -37,6 +58,7 @@ func RegisterUser() gin.HandlerFunc {
 			})
 			return
 		}
-
+		hashedPassword, err := HashPassword(user.Password)
+		
 	}
 }
