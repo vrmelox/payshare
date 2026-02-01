@@ -1,6 +1,6 @@
 import Sidebar from '@/components/common/SideBar';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
-import BalanceCards from '@/components/dashboard/BalanceCards';
+import BalanceCards from '@/components/BalanceCard';
 import RecentTransactions from '@/components/dashboard/RecentTransactions';
 import GroupsChart from '@/components/dashboard/GroupsChart';
 

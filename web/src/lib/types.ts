@@ -35,3 +35,44 @@ export interface Settlement {
     to: string; // Member ID
     amount: number;
 }
+
+export interface RegisterUser {
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone: string;
+    username: string;
+    password: string;
+    confirm_password: string;
+    gender: string;
+    birth_date: string;
+    city_of_birth: string;
+    country_of_birth: string;
+    address: string;
+    city: string;
+    state: string;
+    zip_code: string;
+    country: string;
+}
+
+export interface RegisterUserResponse {
+    status: string;
+    data: {
+        user: {
+            id: string;
+            username: string;
+            email: string;
+            phone: string;
+            gender: string;
+            birth_date: string;
+            city_of_birth: string;
+            country_of_birth: string;
+            address: string;
+            created_at: Date;
+            updated_at: Date;
+            amount: number;
+            role: string;
+            token: string;
+        }
+    }
+}

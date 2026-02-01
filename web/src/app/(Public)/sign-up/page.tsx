@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
+import { registerUser } from "@/api/auth"
 
 const SignUp = () => {
     const [step, setStep] = useState(1)
@@ -16,6 +17,7 @@ const SignUp = () => {
         city_of_birth: "",
         country_of_birth: "",
         password: "",
+        confirm_password: "",
         address: "",
         city: "",
         state: "",
@@ -32,12 +34,38 @@ const SignUp = () => {
     const nextStep = () => setStep(prev => Math.min(prev + 1, 3))
     const prevStep = () => setStep(prev => Math.max(prev - 1, 1))
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         if (step < 3) {
             nextStep()
-        } else {
-            console.log("Submitting form:", formData, "Payment Method:", paymentMethod)
+            return
+        }
+
+        try {
+            await registerUser(formData)
+            alert("Registration successful!")
+            setFormData({
+                first_name: "",
+                last_name: "",
+                username: "",
+                email: "",
+                phone: "",
+                gender: "",
+                birth_date: "",
+                city_of_birth: "",
+                country_of_birth: "",
+                password: "",
+                confirm_password: "",
+                address: "",
+                city: "",
+                state: "",
+                zip_code: "",
+                country: "Ethiopia",
+            })
+            setStep(1) // Return to first step after success
+        } catch (error: any) {
+            console.error("Registration failed:", error)
+            alert(error.response?.data?.error || "Registration failed. Please try again.")
         }
     }
 
@@ -165,6 +193,10 @@ const SignUp = () => {
                                         <input type="password" id="password" value={formData.password} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="••••••••" />
                                         <p className="text-[9px] text-gray-400">Must be at least 8 characters with a number and a symbol.</p>
                                     </div>
+                                    <div className="space-y-1">
+                                        <label htmlFor="confirm_password" className="text-[10px] font-bold text-dark uppercase tracking-wider">Confirm Password</label>
+                                        <input type="password" id="confirm_password" value={formData.confirm_password} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="••••••••" />
+                                    </div>
                                 </div>
                             )}
 
@@ -223,7 +255,7 @@ const SignUp = () => {
                                 {step === 3 && (
                                     <button
                                         type="button"
-                                        onClick={() => console.log("Added later")}
+                                        onClick={() => (setPaymentMethod('cashapp'), nextStep())}
                                         className="text-gray-400 text-xs font-bold hover:text-dark transition-colors px-3"
                                     >
                                         Add later
