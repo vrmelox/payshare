@@ -94,6 +94,25 @@ func RegisterUser(c *gin.Context) gin.HandlerFunc {
 			return
 		}
 		hashedPassword, err := HashPassword(user.Password)
-		
-	}
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Unable to hash the password",
+			})
+		}
+		user.Password = hashedPassword
+
+		result := config.DB.Create(&user)
+			if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Failed to create user",
+				"details": result.Error.Error(),
+			})
+			return
+		}
+	
+		c.JSON(http.StatusCreated, gin.H{
+				"message": "User created successfully",
+				"user": user,
+			})
+		}
 }
