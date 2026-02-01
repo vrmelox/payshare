@@ -35,3 +35,12 @@ export interface Settlement {
     to: string; // Member ID
     amount: number;
 }
+
+export interface RegisterUser {
+    email: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    username: string;
+    password: string;
+}
