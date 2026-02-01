@@ -37,7 +37,22 @@ func CheckEmail(c *gin.Context, email string) (bool, error) {
 	return true, nil
 }
 
+func CheckUsername(c *gin.Context, username string) (bool, error) {
+	var user models.User
+	result := config.DB.Where("username = ?", username).First(&user)
 
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+				return false, nil
+		}
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "An error occured on the serverside",
+			"details": result.Error.Error(),
+		})
+		return false, result.Error
+	}
+	return true, nil
+}
 
 func RegisterUser(c *gin.Context) gin.HandlerFunc {
 	return func(c *gin.Context) {
