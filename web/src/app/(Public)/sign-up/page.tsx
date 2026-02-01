@@ -7,22 +7,22 @@ import { registerUser } from "@/api/auth"
 const SignUp = () => {
     const [step, setStep] = useState(1)
     const [formData, setFormData] = useState({
-        FirstName: "",
-        LastName: "",
-        Username: "",
-        Email: "",
-        Phone: "",
-        Gender: "",
-        BirthDate: "",
-        CityOfBirth: "",
-        CountryOfBirth: "",
-        Password: "",
-        ConfirmPassword: "",
-        Address: "",
-        City: "",
-        State: "",
-        ZipCode: "",
-        Country: "Ethiopia",
+        first_name: "",
+        last_name: "",
+        username: "",
+        email: "",
+        phone: "",
+        gender: "",
+        birth_date: "",
+        city_of_birth: "",
+        country_of_birth: "",
+        password: "",
+        confirm_password: "",
+        address: "",
+        city: "",
+        state: "",
+        zip_code: "",
+        country: "Ethiopia",
     })
     const [paymentMethod, setPaymentMethod] = useState("card")
 
@@ -99,24 +99,24 @@ const SignUp = () => {
                                     <div className="grid grid-cols-2 gap-3">
                                         <div className="space-y-1">
                                             <label htmlFor="first_name" className="text-[10px] font-bold text-dark uppercase tracking-wider">First Name</label>
-                                            <input type="text" id="first_name" value={formData.FirstName} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="John" />
+                                            <input type="text" id="first_name" value={formData.first_name} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="John" />
                                         </div>
                                         <div className="space-y-1">
                                             <label htmlFor="last_name" className="text-[10px] font-bold text-dark uppercase tracking-wider">Last Name</label>
-                                            <input type="text" id="last_name" value={formData.LastName} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="Doe" />
+                                            <input type="text" id="last_name" value={formData.last_name} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="Doe" />
                                         </div>
                                     </div>
                                     <div className="space-y-1">
                                         <label htmlFor="username" className="text-[10px] font-bold text-dark uppercase tracking-wider">Username</label>
-                                        <input type="text" id="username" value={formData.Username} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="johndoe_123" />
+                                        <input type="text" id="username" value={formData.username} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="johndoe_123" />
                                     </div>
                                     <div className="space-y-1">
                                         <label htmlFor="email" className="text-[10px] font-bold text-dark uppercase tracking-wider">Email Address</label>
-                                        <input type="email" id="email" value={formData.Email} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="john@example.com" />
+                                        <input type="email" id="email" value={formData.email} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="john@example.com" />
                                     </div>
                                     <div className="space-y-1">
                                         <label htmlFor="phone" className="text-[10px] font-bold text-dark uppercase tracking-wider">Phone Number</label>
-                                        <input type="tel" id="phone" value={formData.Phone} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="+229 00 00 00 00" />
+                                        <input type="tel" id="phone" value={formData.phone} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="+229 00 00 00 00" />
                                     </div>
 
                                     <div className="relative py-3">
@@ -140,7 +140,7 @@ const SignUp = () => {
                                     <div className="grid grid-cols-2 gap-3">
                                         <div className="space-y-1">
                                             <label htmlFor="gender" className="text-[10px] font-bold text-dark uppercase tracking-wider">Gender</label>
-                                            <select id="gender" value={formData.Gender} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm">
+                                            <select id="gender" value={formData.gender} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm">
                                                 <option value="">Select...</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
@@ -149,27 +149,27 @@ const SignUp = () => {
                                         </div>
                                         <div className="space-y-1">
                                             <label htmlFor="birth_date" className="text-[10px] font-bold text-dark uppercase tracking-wider">Birth Date</label>
-                                            <input type="date" id="birth_date" value={formData.BirthDate} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" />
+                                            <input type="date" id="birth_date" value={formData.birth_date} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" />
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-2 gap-3">
                                         <div className="space-y-1">
                                             <label htmlFor="city_of_birth" className="text-[10px] font-bold text-dark uppercase tracking-wider">City of Birth</label>
-                                            <input type="text" id="city_of_birth" value={formData.CityOfBirth} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="Paris" />
+                                            <input type="text" id="city_of_birth" value={formData.city_of_birth} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="Paris" />
                                         </div>
                                         <div className="space-y-1">
                                             <label htmlFor="country_of_birth" className="text-[10px] font-bold text-dark uppercase tracking-wider">Country of Birth</label>
-                                            <input type="text" id="country_of_birth" value={formData.CountryOfBirth} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="France" />
+                                            <input type="text" id="country_of_birth" value={formData.country_of_birth} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="France" />
                                         </div>
                                     </div>
                                     <div className="space-y-1">
                                         <label htmlFor="password" className="text-[10px] font-bold text-dark uppercase tracking-wider">Create Password</label>
-                                        <input type="password" id="password" value={formData.Password} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="••••••••" />
+                                        <input type="password" id="password" value={formData.password} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="••••••••" />
                                         <p className="text-[9px] text-gray-400">Must be at least 8 characters with a number and a symbol.</p>
                                     </div>
                                     <div className="space-y-1">
                                         <label htmlFor="confirm_password" className="text-[10px] font-bold text-dark uppercase tracking-wider">Confirm Password</label>
-                                        <input type="password" id="confirm_password" value={formData.ConfirmPassword} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="••••••••" />
+                                        <input type="password" id="confirm_password" value={formData.confirm_password} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="••••••••" />
                                     </div>
                                 </div>
                             )}
@@ -178,26 +178,26 @@ const SignUp = () => {
                                 <div className="space-y-3">
                                     <div className="space-y-1">
                                         <label htmlFor="address" className="text-[10px] font-bold text-dark uppercase tracking-wider">Street Address</label>
-                                        <input type="text" id="address" value={formData.Address} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="123 Main St" />
+                                        <input type="text" id="address" value={formData.address} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="123 Main St" />
                                     </div>
                                     <div className="grid grid-cols-2 gap-3">
                                         <div className="space-y-1">
                                             <label htmlFor="city" className="text-[10px] font-bold text-dark uppercase tracking-wider">City</label>
-                                            <input type="text" id="city" value={formData.City} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="New York" />
+                                            <input type="text" id="city" value={formData.city} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="New York" />
                                         </div>
                                         <div className="space-y-1">
                                             <label htmlFor="state" className="text-[10px] font-bold text-dark uppercase tracking-wider">State/Region</label>
-                                            <input type="text" id="state" value={formData.State} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="NY" />
+                                            <input type="text" id="state" value={formData.state} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="NY" />
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-2 gap-3">
                                         <div className="space-y-1">
                                             <label htmlFor="zip_code" className="text-[10px] font-bold text-dark uppercase tracking-wider">Zip Code</label>
-                                            <input type="text" id="zip_code" value={formData.ZipCode} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="10001" />
+                                            <input type="text" id="zip_code" value={formData.zip_code} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="10001" />
                                         </div>
                                         <div className="space-y-1">
                                             <label htmlFor="country" className="text-[10px] font-bold text-dark uppercase tracking-wider">Country</label>
-                                            <input type="text" id="country" value={formData.Country} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="Ethiopia" />
+                                            <input type="text" id="country" value={formData.country} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="Ethiopia" />
                                         </div>
                                     </div>
 
@@ -229,7 +229,7 @@ const SignUp = () => {
                                 {step === 3 && (
                                     <button
                                         type="button"
-                                        onClick={() => console.log("Added later")}
+                                        onClick={() => (setPaymentMethod('cashapp'), nextStep())}
                                         className="text-gray-400 text-xs font-bold hover:text-dark transition-colors px-3"
                                     >
                                         Add later

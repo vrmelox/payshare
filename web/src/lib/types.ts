@@ -37,22 +37,22 @@ export interface Settlement {
 }
 
 export interface RegisterUser {
-    Email: string;
-    FirstName: string;
-    LastName: string;
-    Phone: string;
-    Username: string;
-    Password: string;
-    ConfirmPassword: string;
-    Gender: string;
-    BirthDate: string;
-    CityOfBirth: string;
-    CountryOfBirth: string;
-    Address: string;
-    City: string;
-    State: string;
-    ZipCode: string;
-    Country: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone: string;
+    username: string;
+    password: string;
+    confirm_password: string;
+    gender: string;
+    birth_date: string;
+    city_of_birth: string;
+    country_of_birth: string;
+    address: string;
+    city: string;
+    state: string;
+    zip_code: string;
+    country: string;
 }
 
 export interface RegisterUserResponse {
