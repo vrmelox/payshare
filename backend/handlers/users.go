@@ -3,7 +3,8 @@ package handlers
 import (
 	"net/http"
 	"errors"
-
+	"os"
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/vrmelo/payshare/config"
@@ -11,6 +12,34 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
+
+type PaystackUser struct {
+	Email string `json:"email"`
+	FirstName string `json:"first_name"`
+	LastName string `json:"last_name"`
+	Phone string `json:"phone"`
+}
+
+func RegisterUserPaystack(user models.User) bool {
+	client := &http.Client{}
+	url := os.Getenv("PAYSTACK_API_URL")
+	secretKey := os.Getenv("PAYSTACK_SECRET_KEY")
+	authorization := "Authorization: Bearer " + secretKey
+	content_type := "Content-Type: application/json"
+	data := PaystackUser{
+		Email: user.Email,
+		FirstName: user.FirstName,
+		LastName: user.LastName,
+		Phone: user.Phone,
+	}
+	json.NewEncoder(data)
+	response := client.Post(url, content_type, data)
+	fmt.Println(response)
+	if response.StatusCode == http.StatusOK {
+		return true
+	}
+	return false
+}
 
 func HashPassword(password string) (string, error) {
 	HashPassword, err := bcrypt.GenerateFromPassword([]byte(password), 12)
@@ -108,9 +137,15 @@ func RegisterUser(c *gin.Context) {
 			})
 			return
 		}
-	
+		response := RegisterUserPaystack(user)
+		if response == false {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Failed to register user to Paystack",
+			})
+			return
+		}
 		c.JSON(http.StatusCreated, gin.H{
 				"message": "User created successfully",
 				"user": user,
-			})
+		})
 }
