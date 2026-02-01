@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
@@ -168,6 +169,7 @@ func RegisterUser(c *gin.Context) {
 			return
 		}
 		response := RegisterUserPaystack(user)
+		fmt.Println("Paystack response:", response)
 		if response == false {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"error": "Failed to register user to Paystack",

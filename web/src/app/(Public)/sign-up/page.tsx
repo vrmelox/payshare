@@ -34,12 +34,38 @@ const SignUp = () => {
     const nextStep = () => setStep(prev => Math.min(prev + 1, 3))
     const prevStep = () => setStep(prev => Math.max(prev - 1, 1))
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         if (step < 3) {
             nextStep()
-        } else {
-            registerUser(formData)
+            return
+        }
+
+        try {
+            await registerUser(formData)
+            alert("Registration successful!")
+            setFormData({
+                first_name: "",
+                last_name: "",
+                username: "",
+                email: "",
+                phone: "",
+                gender: "",
+                birth_date: "",
+                city_of_birth: "",
+                country_of_birth: "",
+                password: "",
+                confirm_password: "",
+                address: "",
+                city: "",
+                state: "",
+                zip_code: "",
+                country: "Ethiopia",
+            })
+            setStep(1) // Return to first step after success
+        } catch (error: any) {
+            console.error("Registration failed:", error)
+            alert(error.response?.data?.error || "Registration failed. Please try again.")
         }
     }
 
