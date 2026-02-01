@@ -43,4 +43,32 @@ export interface RegisterUser {
     phone: string;
     username: string;
     password: string;
+    confirmPassword: string;
+    gender: string;
+    birthDate: string;
+    cityOfBirth: string;
+    countryOfBirth: string;
+    address: string;
+}
+
+export interface RegisterUserResponse {
+status: string;
+data: {
+    user: {
+        id: string;
+        username: string;
+        email: string;
+        phone: string;
+        gender: string;
+        birthDate: string;
+        cityOfBirth: string;
+        countryOfBirth: string;
+        address: string;
+        createdAt: Date;
+        updatedAt: Date;
+        amount: number;
+        role: string;
+        token: string;
+    }
+}
 }

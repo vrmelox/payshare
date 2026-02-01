@@ -16,6 +16,7 @@ const SignUp = () => {
         city_of_birth: "",
         country_of_birth: "",
         password: "",
+        confirm_password: "",
         address: "",
         city: "",
         state: "",
@@ -164,6 +165,10 @@ const SignUp = () => {
                                         <label htmlFor="password" className="text-[10px] font-bold text-dark uppercase tracking-wider">Create Password</label>
                                         <input type="password" id="password" value={formData.password} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="••••••••" />
                                         <p className="text-[9px] text-gray-400">Must be at least 8 characters with a number and a symbol.</p>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <label htmlFor="confirm_password" className="text-[10px] font-bold text-dark uppercase tracking-wider">Confirm Password</label>
+                                        <input type="password" id="confirm_password" value={formData.confirm_password} onChange={handleChange} required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent transition outline-none text-dark text-sm" placeholder="••••••••" />
                                     </div>
                                 </div>
                             )}

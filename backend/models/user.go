@@ -12,6 +12,7 @@ type User struct {
 	CityOfBirth    string `gorm:"size:100" json:"city_of_birth"`
 	CountryOfBirth string `gorm:"size:100" json:"country_of_birth"`
 	Password       string `gorm:"not null" json:"password"`
+	ConfirmPassword string `gorm:"not null" json:"confirm_password"`
 	Address        string `gorm:"size:255" json:"address"`
 	City           string `gorm:"size:100" json:"city"`
 	State          string `gorm:"size:100" json:"state"`

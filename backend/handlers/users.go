@@ -145,6 +145,12 @@ func RegisterUser(c *gin.Context) {
 			})
 			return
 		}
+		if user.Password != user.ConfirmPassword {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "Passwords do not match",
+			})
+			return
+		}
 		hashedPassword, err := HashPassword(user.Password)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
