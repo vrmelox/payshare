@@ -37,38 +37,42 @@ export interface Settlement {
 }
 
 export interface RegisterUser {
-    email: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    username: string;
-    password: string;
-    confirmPassword: string;
-    gender: string;
-    birthDate: string;
-    cityOfBirth: string;
-    countryOfBirth: string;
-    address: string;
+    Email: string;
+    FirstName: string;
+    LastName: string;
+    Phone: string;
+    Username: string;
+    Password: string;
+    ConfirmPassword: string;
+    Gender: string;
+    BirthDate: string;
+    CityOfBirth: string;
+    CountryOfBirth: string;
+    Address: string;
+    City: string;
+    State: string;
+    ZipCode: string;
+    Country: string;
 }
 
 export interface RegisterUserResponse {
-status: string;
-data: {
-    user: {
-        id: string;
-        username: string;
-        email: string;
-        phone: string;
-        gender: string;
-        birthDate: string;
-        cityOfBirth: string;
-        countryOfBirth: string;
-        address: string;
-        createdAt: Date;
-        updatedAt: Date;
-        amount: number;
-        role: string;
-        token: string;
+    status: string;
+    data: {
+        user: {
+            id: string;
+            username: string;
+            email: string;
+            phone: string;
+            gender: string;
+            birth_date: string;
+            city_of_birth: string;
+            country_of_birth: string;
+            address: string;
+            created_at: Date;
+            updated_at: Date;
+            amount: number;
+            role: string;
+            token: string;
+        }
     }
-}
 }
