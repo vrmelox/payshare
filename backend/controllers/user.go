@@ -6,7 +6,16 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/vrmelo/payshare/models"
+	"golang.org/x/crypto/bcrypt"
 )
+
+func HashPassword(password string) (string, error) {
+	HashPassword, err := bcrypt.GenerateFromPassword([]byte(password), 12)
+	if err != nil {
+		return "", err
+	}
+	return string(HashPassword), nil
+}
 
 
 func RegisterUser() gin.HandlerFunc {
@@ -28,6 +37,6 @@ func RegisterUser() gin.HandlerFunc {
 			})
 			return
 		}
-		
+
 	}
 }
