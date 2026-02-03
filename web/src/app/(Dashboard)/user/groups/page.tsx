@@ -130,14 +130,9 @@ export default function CreateGroupPage() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <button className="text-gray-400 hover:text-gray-600">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
             <h1 className="text-3xl font-bold text-gray-900">Create New Group</h1>
           </div>
-          <p className="text-gray-500 ml-9">Set up a new payment group and invite members</p>
+          <p className="text-gray-500">Set up a new payment group and invite members</p>
         </div>
 
         {/* Form */}
