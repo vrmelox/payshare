@@ -42,15 +42,15 @@ export default function CreateGroupPage() {
   });
 
   // Filter users based on search query
-  const searchResults = usersDatabase.filter(user => 
+  const searchResults = usersDatabase.filter(user =>
     !selectedMembers.some(member => member.id === user.id) &&
     (user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-     user.email.toLowerCase().includes(searchQuery.toLowerCase()))
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   const addMember = (user: typeof usersDatabase[0]) => {
     const equalPercentage = 100 / (selectedMembers.length + 1);
-    
+
     // Recalculate percentages for all members
     const updatedMembers = selectedMembers.map(member => ({
       ...member,
@@ -67,14 +67,14 @@ export default function CreateGroupPage() {
         percentage: parseFloat(equalPercentage.toFixed(2))
       }
     ]);
-    
+
     setSearchQuery('');
     setShowSearchResults(false);
   };
 
   const removeMember = (memberId: number) => {
     const newMembers = selectedMembers.filter(m => m.id !== memberId);
-    
+
     if (newMembers.length > 0) {
       const equalPercentage = 100 / newMembers.length;
       const updatedMembers = newMembers.map(member => ({
@@ -115,17 +115,46 @@ export default function CreateGroupPage() {
       alert('Total percentage must equal 100%');
       return;
     }
-    console.log({
-      ...formData,
-      members: selectedMembers
-    });
+
+    // SIMULATION: Create a notification for the current user
+    const newNotification = {
+      id: Date.now(),
+      type: 'group_invite',
+      title: `Invitation to join "${formData.groupName}"`,
+      message: `You have been added to the group "${formData.groupName}" with a share of ${selectedMembers[0]?.percentage || 0}%`,
+      time: 'Just now',
+      icon: '👥',
+      iconBg: 'bg-primary',
+      read: false,
+      fromUser: {
+        name: 'System', // Or current user if we had auth context
+        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=System'
+      },
+      groupName: formData.groupName,
+      // SIMULATION DATA
+      simulationData: {
+        amountToPay: formData.invoiceAmount
+          ? (parseFloat(formData.invoiceAmount) * (selectedMembers[0]?.percentage || 0) / 100).toFixed(2)
+          : '0.00',
+        totalAmount: formData.invoiceAmount,
+        totalMembers: selectedMembers.length,
+        description: formData.description
+      }
+    };
+
+    // Save to localStorage
+    const existingNotifications = JSON.parse(localStorage.getItem('simulated_notifications') || '[]');
+    localStorage.setItem('simulated_notifications', JSON.stringify([newNotification, ...existingNotifications]));
+
+    // Redirect to notifications to see the flow
+    window.location.href = '/user/notifications';
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Sidebar */}
       <Sidebar activeItem="groups" />
-      
+
       {/* Main Content */}
       <main className="ml-64 p-8">
         {/* Header */}
@@ -148,7 +177,7 @@ export default function CreateGroupPage() {
                 type="text"
                 required
                 value={formData.groupName}
-                onChange={(e) => setFormData({...formData, groupName: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, groupName: e.target.value })}
                 placeholder="e.g., Family Trip 2024"
                 className="w-full px-4 py-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
@@ -161,7 +190,7 @@ export default function CreateGroupPage() {
               </label>
               <textarea
                 value={formData.description}
-                onChange={(e) => setFormData({...formData, description: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 placeholder="Add a brief description of this group..."
                 rows={4}
                 className="w-full px-4 py-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
@@ -177,11 +206,10 @@ export default function CreateGroupPage() {
                 {merchants.map((merchant) => (
                   <label
                     key={merchant.id}
-                    className={`relative flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all N{
-                      formData.merchantId === merchant.id.toString()
+                    className={`relative flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${formData.merchantId === merchant.id.toString()
                         ? 'border-blue-500 bg-blue-50'
                         : 'border-gray-200 hover:border-gray-300'
-                    }`}
+                      }`}
                   >
                     <input
                       type="radio"
@@ -189,12 +217,12 @@ export default function CreateGroupPage() {
                       required
                       value={merchant.id}
                       checked={formData.merchantId === merchant.id.toString()}
-                      onChange={(e) => setFormData({...formData, merchantId: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, merchantId: e.target.value })}
                       className="sr-only"
                     />
                     <div className="w-12 h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center p-2">
-                      <img 
-                        src={merchant.logo} 
+                      <img
+                        src={merchant.logo}
                         alt={merchant.name}
                         className="w-full h-full object-contain"
                       />
@@ -225,7 +253,7 @@ export default function CreateGroupPage() {
                   step="0.01"
                   min="0"
                   value={formData.invoiceAmount}
-                  onChange={(e) => setFormData({...formData, invoiceAmount: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, invoiceAmount: e.target.value })}
                   placeholder="0.00"
                   className="w-full pl-8 pr-4 py-3 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-semibold"
                 />
@@ -271,8 +299,8 @@ export default function CreateGroupPage() {
                           onClick={() => addMember(user)}
                           className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
                         >
-                          <img 
-                            src={user.avatar} 
+                          <img
+                            src={user.avatar}
                             alt={user.name}
                             className="w-10 h-10 rounded-full"
                           />
@@ -306,21 +334,21 @@ export default function CreateGroupPage() {
                   </div>
 
                   {selectedMembers.map((member) => {
-                    const amount = formData.invoiceAmount 
+                    const amount = formData.invoiceAmount
                       ? (parseFloat(formData.invoiceAmount) * member.percentage / 100).toFixed(2)
                       : '0.00';
-                    
+
                     return (
                       <div
                         key={member.id}
                         className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg"
                       >
-                        <img 
-                          src={member.avatar} 
+                        <img
+                          src={member.avatar}
                           alt={member.name}
                           className="w-12 h-12 rounded-full flex-shrink-0"
                         />
-                        
+
                         <div className="flex-1 min-w-0">
                           <h3 className="text-sm font-semibold text-gray-900">{member.name}</h3>
                           <p className="text-xs text-gray-500">{member.email}</p>
@@ -362,16 +390,14 @@ export default function CreateGroupPage() {
                   })}
 
                   {/* Total Percentage Indicator */}
-                  <div className={`flex items-center justify-between p-4 rounded-lg N{
-                    Math.abs(totalPercentage - 100) < 0.01
+                  <div className={`flex items-center justify-between p-4 rounded-lg ${Math.abs(totalPercentage - 100) < 0.01
                       ? 'bg-green-50 border border-green-200'
                       : 'bg-red-50 border border-red-200'
-                  }`}>
+                    }`}>
                     <span className="text-sm font-medium text-gray-900">Total</span>
                     <div className="flex items-center gap-4">
-                      <span className={`text-lg font-bold N{
-                        Math.abs(totalPercentage - 100) < 0.01 ? 'text-green-600' : 'text-red-600'
-                      }`}>
+                      <span className={`text-lg font-bold ${Math.abs(totalPercentage - 100) < 0.01 ? 'text-green-600' : 'text-red-600'
+                        }`}>
                         {totalPercentage.toFixed(2)}%
                       </span>
                       {formData.invoiceAmount && (
@@ -405,15 +431,13 @@ export default function CreateGroupPage() {
               >
                 Cancel
               </button>
-              <Link href="/user/groups"> 
-                <button
-                    type="submit"
-                    disabled={selectedMembers.length === 0 || Math.abs(totalPercentage - 100) > 0.01}
-                    className="flex-1 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
-                >
-                    Create Group
-                </button>
-              </Link>
+              <button
+                type="submit"
+                disabled={selectedMembers.length === 0 || Math.abs(totalPercentage - 100) > 0.01}
+                className="flex-1 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+              >
+                Create Group
+              </button>
             </div>
           </div>
         </form>
