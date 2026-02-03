@@ -1,3 +1,4 @@
+import { group } from "console";
 import Image from "next/image";
 
 export default function NavItem({ icon, label, active = false }) {
@@ -7,6 +8,7 @@ export default function NavItem({ icon, label, active = false }) {
         payouts: "/payouts.png",
         messages: "/messages.png",
         notifications: "/notifications.png",
+        groups: "/groups.png",
         settings: "/settings.png",
     };
 

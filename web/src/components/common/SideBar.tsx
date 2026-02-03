@@ -34,6 +34,7 @@ export default function Sidebar({activeItem = '' }) {
                 <NavItem icon="home" label="Dashboard" active={activeItem === 'dashboard'} />
                 <NavItem icon="payouts" label="Payouts" active={activeItem === 'payouts'} />
                 <NavItem icon="transactions" label="Transactions" active={activeItem === 'transactions'} />
+                <NavItem icon="groups" label="Groups" active={activeItem === 'groups'} />
                 <NavItem icon="messages" label="Messages" active={activeItem === 'messages'} />
                 <NavItem icon="notifications" label="Notifications" active={activeItem === 'notifications'} />
             </nav>
