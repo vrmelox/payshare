@@ -8,7 +8,7 @@ const epilogue = Epilogue({
 });
 
 const inter = Inter({
-  variable: "--font-inter", 
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 

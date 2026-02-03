@@ -1,8 +1,12 @@
+import Link from "next/link";
+
 export default function QuickActions() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* Create Group Button */}
+      
       <button className="bg-white rounded-2xl border-2 border-dashed border-gray-300 p-6 hover:border-blue-500 hover:bg-blue-50/50 transition-all group">
+      <Link href="/user/groups">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center group-hover:bg-blue-200 transition-colors">
             <svg className="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -14,7 +18,9 @@ export default function QuickActions() {
             <p className="text-sm text-gray-500 mt-0.5">Start managing expenses with friends</p>
           </div>
         </div>
+        </Link>
       </button>
+
 
       {/* Add Expense Button */}
       <button className="bg-white rounded-2xl border-2 border-dashed border-gray-300 p-6 hover:border-green-500 hover:bg-green-50/50 transition-all group">
