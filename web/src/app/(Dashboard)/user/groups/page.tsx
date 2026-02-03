@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/common/SideBar';
+import Link from "next/link";
 
 // Simulated user database for search
 const usersDatabase = [
@@ -149,7 +150,7 @@ export default function CreateGroupPage() {
                 value={formData.groupName}
                 onChange={(e) => setFormData({...formData, groupName: e.target.value})}
                 placeholder="e.g., Family Trip 2024"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
@@ -163,7 +164,7 @@ export default function CreateGroupPage() {
                 onChange={(e) => setFormData({...formData, description: e.target.value})}
                 placeholder="Add a brief description of this group..."
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
               />
             </div>
 
@@ -176,7 +177,7 @@ export default function CreateGroupPage() {
                 {merchants.map((merchant) => (
                   <label
                     key={merchant.id}
-                    className={`relative flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                    className={`relative flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all N{
                       formData.merchantId === merchant.id.toString()
                         ? 'border-blue-500 bg-blue-50'
                         : 'border-gray-200 hover:border-gray-300'
@@ -217,7 +218,7 @@ export default function CreateGroupPage() {
                 Invoice Amount <span className="text-red-500">*</span>
               </label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">$</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">N</span>
                 <input
                   type="number"
                   required
@@ -342,7 +343,7 @@ export default function CreateGroupPage() {
 
                           {/* Amount Display */}
                           <div className="w-24 text-right">
-                            <p className="text-sm font-semibold text-gray-900">${amount}</p>
+                            <p className="text-sm font-semibold text-gray-900">N{amount}</p>
                           </div>
 
                           {/* Remove Button */}
@@ -361,21 +362,21 @@ export default function CreateGroupPage() {
                   })}
 
                   {/* Total Percentage Indicator */}
-                  <div className={`flex items-center justify-between p-4 rounded-lg ${
+                  <div className={`flex items-center justify-between p-4 rounded-lg N{
                     Math.abs(totalPercentage - 100) < 0.01
                       ? 'bg-green-50 border border-green-200'
                       : 'bg-red-50 border border-red-200'
                   }`}>
                     <span className="text-sm font-medium text-gray-900">Total</span>
                     <div className="flex items-center gap-4">
-                      <span className={`text-lg font-bold ${
+                      <span className={`text-lg font-bold N{
                         Math.abs(totalPercentage - 100) < 0.01 ? 'text-green-600' : 'text-red-600'
                       }`}>
                         {totalPercentage.toFixed(2)}%
                       </span>
                       {formData.invoiceAmount && (
                         <span className="text-sm font-semibold text-gray-900">
-                          ${formData.invoiceAmount}
+                          N{formData.invoiceAmount}
                         </span>
                       )}
                     </div>
@@ -404,13 +405,15 @@ export default function CreateGroupPage() {
               >
                 Cancel
               </button>
-              <button
-                type="submit"
-                disabled={selectedMembers.length === 0 || Math.abs(totalPercentage - 100) > 0.01}
-                className="flex-1 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
-              >
-                Create Group
-              </button>
+              <Link href="/user/groups"> 
+                <button
+                    type="submit"
+                    disabled={selectedMembers.length === 0 || Math.abs(totalPercentage - 100) > 0.01}
+                    className="flex-1 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                >
+                    Create Group
+                </button>
+              </Link>
             </div>
           </div>
         </form>

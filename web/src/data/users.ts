@@ -2,6 +2,7 @@ export const Users = [
     {
         id: 1,
         username: "adekunle_oluwaseun",
+        name: "Adekunle Oluwaseun",
         first_name: "Oluwaseun",
         last_name: "Adekunle",
         birth_date: "1995-03-15",
@@ -23,6 +24,7 @@ export const Users = [
     {
         id: 2,
         username: "amina_koffi",
+        name: "Amina Koffi",
         first_name: "Amina",
         last_name: "Koffi",
         birth_date: "1992-07-22",
@@ -44,6 +46,7 @@ export const Users = [
     {
         id: 3,
         username: "kwame_mensah",
+        name: "Kwame Mensah",
         first_name: "Kwame",
         last_name: "Mensah",
         birth_date: "1988-11-10",
@@ -65,6 +68,7 @@ export const Users = [
     {
         id: 4,
         username: "fatoumata_traore",
+        name: "Fatoumata Traoré",
         first_name: "Fatoumata",
         last_name: "Traoré",
         birth_date: "1997-05-18",
