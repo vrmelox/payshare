@@ -32,15 +32,15 @@ export default function Sidebar({activeItem = '' }) {
     
             <nav className="flex-1 p-4 space-y-1">
                 <NavItem icon="home" label="Dashboard" active={activeItem === 'dashboard'} />
-                <NavItem icon="wallet" label="Payouts" active={activeItem === 'payouts'} />
+                <NavItem icon="payouts" label="Payouts" active={activeItem === 'payouts'} />
                 <NavItem icon="transactions" label="Transactions" active={activeItem === 'transactions'} />
+                <NavItem icon="messages" label="Messages" active={activeItem === 'messages'} />
+                <NavItem icon="notifications" label="Notifications" active={activeItem === 'notifications'} />
             </nav>
 
             {/* Bottom actions */}
             <div className="p-4 space-y-2 border-t border-slate-100">
                 <NavItem icon="settings" label="Settings" active={activeItem === 'settings'} />
-                <NavItem icon="support" label="Get Support" active={activeItem === 'support'} />
-                <NavItem icon="feedback" label="Give Feedback" active={activeItem === 'feedback'} />
             </div>
           </aside>
   );
